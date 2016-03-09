@@ -12,10 +12,7 @@ router.use(function(req, res, next){
 })
 
 router.get('/', function(req, res, next) {
-  converter.fromFile("./speedMap_final.csv",function(err,result){
-    tempJSON = result;
-    console.log(tempJSON);
-  });
+
   if(req.query.day && req.query.month && req.query.year && req.query.hours && req.query.minutes){
     var queryString = "/home/sohailyarkhan/anaconda2/bin/python /home/sohailyarkhan/node-server/fyp_node_server/prediction.py " + String(req.query.year) + " " + String(req.query.month) + " " + String(req.query.day) + " " + String(req.query.hours) + " " + String(req.query.minutes);
     console.log(queryString);
@@ -29,10 +26,13 @@ router.get('/', function(req, res, next) {
         splitArray[0] = splitArray[0].replace('\'','');
         splitArray[splitArray.length-1] = splitArray[0].replace('\'','');
         console.log(splitArray);
-        for(var i = 0; i<splitArray.length; i++){
-          tempJSON[i].road_saturation = splitArray[i];
-        }
-        console.log(tempJSON);
+        converter.fromFile("./speedMap_final.csv",function(err,result){
+            tempJSON = result;
+            for(var i = 0; i<splitArray.length; i++){
+              tempJSON[i].road_saturation = splitArray[i];
+            }
+            console.log(tempJSON);
+          });
         res.status(200);
         res.json({status: 'success', nodes: tempJSON});
       }else{
