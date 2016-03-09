@@ -3,6 +3,8 @@ var router = express.Router();
 var sys = require('sys')
 var exec = require('child_process').exec;
 var child;
+var Converter = require("csvtojson").Converter;
+var converter = new Converter({});
 
 router.use(function(req, res, next){
   console.log('Prediction API');
@@ -10,6 +12,10 @@ router.use(function(req, res, next){
 })
 
 router.get('/', function(req, res, next) {
+  converter.fromFile("./speedMap_final.csv",function(err,result){
+    tempJSON = result;
+    console.log(tempJSON);
+  });
   if(req.query.day && req.query.month && req.query.year && req.query.hours && req.query.minutes){
     var queryString = "/home/sohailyarkhan/anaconda2/bin/python /home/sohailyarkhan/node-server/fyp_node_server/prediction.py " + String(req.query.year) + " " + String(req.query.month) + " " + String(req.query.day) + " " + String(req.query.hours) + " " + String(req.query.minutes);
     console.log(queryString);
