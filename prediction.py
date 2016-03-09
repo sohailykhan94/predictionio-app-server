@@ -43,7 +43,7 @@ importString = '/home/sohailyarkhan/pythonLearningModels/'+month+'/model.pkl'
 with open(importString, 'rb') as fid:
     SGD = cPickle.load(fid)
 cols = ['src', 'des'];
-data_speed = pd.read_csv('/home/sohailyarkhan/speedmap.csv', names=cols, dtype={})
+data_speed = pd.read_csv('/home/sohailyarkhan/node-server/fyp_node_server/speedmap.csv', names=cols, dtype={})
 final_data = pd.DataFrame(columns=['year','month','day','hour','minute','src','des'])
 final_data['src'] = data_speed['src']
 final_data['des'] = data_speed['des']
