@@ -22,7 +22,8 @@ router.get('/', function(req, res, next) {
     // executes `pwd`
     child = exec(queryString, function (error, stdout, stderr) {
       if(stdout){
-
+        stdout = stdout.replace('[','');
+        stdout = stdout.replace(']','');
         res.status(200);
         res.json({status: 'success', data: stdout});
       }else{
