@@ -11,7 +11,7 @@ router.use(function(req, res, next){
 
 router.get('/', function(req, res, next) {
   if(req.query.day && req.query.month && req.query.year && req.query.hours && req.query.minutes && req.query.src && req.query.des){
-    var queryString = "/home/sohail/anaconda2/bin/python /home/sohail/prediction.py " + String(req.query.day) + " " + String(req.query.month) + " " + String(req.query.year) + " " + String(req.query.hours) + " " + String(req.query.minutes) + " " + String(req.query.src) + " " + String(req.query.des);
+    var queryString = "python /home/sohail/prediction.py " + String(req.query.day) + " " + String(req.query.month) + " " + String(req.query.year) + " " + String(req.query.hours) + " " + String(req.query.minutes);
     console.log(queryString);
     // executes `pwd`
     child = exec(queryString, function (error, stdout, stderr) {
