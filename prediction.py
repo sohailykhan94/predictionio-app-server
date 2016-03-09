@@ -53,4 +53,4 @@ final_data['day'] = int(dateObj.day)
 final_data['hour'] = int(dateObj.hour)
 final_data['minute'] = int(dateObj.minute)
 pred_new = SGD.predict(final_data)
-print pred_new
+pred_new
