@@ -24,14 +24,23 @@ router.get('/', function(req, res, next) {
       if(stdout){
         stdout = stdout.replace('[','');
         stdout = stdout.replace(']','');
+        stdout = stdout.replace(/(?:\r\n|\r|\n)/g,'');
+        splitArray = stdout.split("\' \'");
+        splitArray[0] = splitArray[0].replace('\'','');
+        splitArray[splitArray.length-1] = splitArray[0].replace('\'','');
+        console.log(splitArray);
+        for(var i = 0; i<splitArray.length; i++){
+          tempJSON[i].road_saturation = splitArray[i];
+        }
+        console.log(tempJSON);
         res.status(200);
-        res.json({status: 'success', data: stdout});
+        res.json({status: 'success', nodes: tempJSON});
       }else{
         res.status(404);
         res.json({status: 'error', data: 'error'});
       }
-      sys.print('stdout: ' + stdout);
-      sys.print('stderr: ' + stderr);
+      //sys.print('stdout: ' + stdout);
+      //sys.print('stderr: ' + stderr);
       if (error !== null) {
         console.log('exec error: ' + error);
       }
